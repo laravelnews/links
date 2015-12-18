@@ -6,7 +6,7 @@ The project has the following goals:
 
 * [x] Login/Register
 * [x] Once signed in add a new link
-* [ ] The link is then placed into holding and an email sent to administrator for approval. 
+* [x] The link is then placed into holding and an email sent to administrator for approval. 
 * [ ] Admin logins and approves or denies. (_If approved email the user and tell them_)
 
 ### License
