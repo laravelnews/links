@@ -9,11 +9,19 @@ use App\Events\LinkWasSubmitted;
 
 class SubmitController extends Controller
 {
+    /**
+     * Make sure only logged in users can access.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Show the submission form.
+     *
+     * @return View
+     */
     public function index()
     {
         return view('submit.index', [
@@ -21,22 +29,36 @@ class SubmitController extends Controller
         ]);
     }
 
+    /**
+     * Save the link and notify the admin
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request)
     {
         $this->validate($request, $this->validationRules());
 
-        $link = Links::create([
+        $link = $this->saveLink($request);
+
+        event(new LinkWasSubmitted($link));
+
+        return redirect('/')->with(['status' => 'Link submitted for approval']);
+    }
+
+    /**
+     * @param Request $request
+     * @return static
+     */
+    protected function saveLink(Request $request)
+    {
+        return Links::create([
             'category_id' => $request->category_id,
             'user_id' => auth()->user()->id,
             'title' => $request->title,
             'url' => $request->url,
             'description' => $request->description,
         ]);
-
-        // Notify
-        event(new LinkWasSubmitted($link));
-
-        return redirect('/')->with(['status' => 'Link submitted for approval']);
     }
 
     /**
