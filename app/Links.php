@@ -27,4 +27,9 @@ class Links extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function hostName()
+    {
+        return parse_url($this->url, PHP_URL_HOST);
+    }
 }
