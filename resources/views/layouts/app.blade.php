@@ -72,7 +72,12 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="container">
+        <div class="row">
+            @include('partials.errors')
+            @yield('content')
+        </div>
+    </div>
 
     <!-- JavaScripts -->
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
