@@ -34,6 +34,8 @@ class SubmitTest extends TestCase
 
     public function testSubmitFormSaves()
     {
+        $this->withoutEvents();
+
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
@@ -48,6 +50,8 @@ class SubmitTest extends TestCase
 
     public function testFlashMessageShows()
     {
+        $this->withoutEvents();
+        
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
