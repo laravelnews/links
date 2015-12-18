@@ -11,13 +11,7 @@ class Links extends Model
 
     protected $fillable = ['category_id', 'user_id', 'title', 'url', 'description', 'published', 'word_count', 'image_url', 'published_at'];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
     protected $dates = ['created_at', 'updated_at', 'published_at'];
-
 
     public function user()
     {
