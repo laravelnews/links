@@ -9,7 +9,7 @@ class LinksTest extends TestCase
 {
     public function testItCreatesHostName()
     {
-        $link = factory(Links::class)->create([
+        $link = factory(Links::class)->make([
             'url' => 'https://laravel-news.com/2015/11/laravel-5-2-a-look-at-whats-coming/',
         ]);
 
