@@ -20,6 +20,7 @@ class CreateLinksTable extends Migration
             $table->string('url');
             $table->text('description');
             $table->integer('published')->nullable();
+            $table->timestamp('published_at');
             $table->timestamps();
         });
     }

@@ -5,9 +5,9 @@ Welcome to the Laravel News Links Repository. This code is designed to power [li
 The project has the following goals: 
 
 * [x] Login/Register
-* [] Once signed in add a new link
-* [] The link is then placed into holding and an email sent to administrator for approval. 
-* [] Admin logins and approves or denies. (_If approved email the user and tell them_)
+* [x] Once signed in add a new link
+* [ ] The link is then placed into holding and an email sent to administrator for approval. 
+* [ ] Admin logins and approves or denies. (_If approved email the user and tell them_)
 
 ### License
 

@@ -37,6 +37,6 @@ class SubmitController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect('/')->withStatus('Link submitted for approval');
+        return redirect('/')->with(['status' => 'Link submitted for approval']);
     }
 }
