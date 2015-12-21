@@ -68,7 +68,7 @@ class SubmitController extends Controller
     {
         return [
             'title' => 'required',
-            'url' => 'required',
+            'url' => 'required|url',
             'description' => 'required',
             'category_id' => 'required',
         ];
