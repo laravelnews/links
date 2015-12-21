@@ -15,4 +15,50 @@ class LinksTest extends TestCase
 
         $this->assertEquals('laravel-news.com', $link->hostName());
     }
+
+    public function testItGeneratesSlug()
+    {
+        $link = factory(Links::class)->make([
+            'id' => 100,
+            'title' => 'Laravel News',
+        ]);
+
+        $this->assertEquals('100-laravel-news', $link->slug);
+    }
+
+    public function testItGeneratesFancyTitle()
+    {
+        $link = factory(Links::class)->make([
+            'title' => 'Laravel News "My Test"',
+        ]);
+
+        $this->assertEquals('Laravel News <i>"My Test"</i>', $link->title);
+
+        $link = factory(Links::class)->make([
+            'title' => 'Laravel News (My Test)',
+        ]);
+
+        $this->assertEquals('Laravel News <i>(My Test)</i>', $link->title);
+
+        $link = factory(Links::class)->make([
+            'title' => 'Dashing -- Title',
+        ]);
+
+        $this->assertEquals('Dashing — Title', $link->title);
+
+        $link = factory(Links::class)->make([
+            'title' => 'Test & Stuff',
+        ]);
+
+        $this->assertEquals('Test <i>&amp;</i> Stuff', $link->title);
+    }
+
+    public function testItGeneratesFancyTitleWithMultiple()
+    {
+        $link = factory(Links::class)->make([
+            'title' => 'Laravel & Vue -- With "awesome stuff"',
+        ]);
+
+        $this->assertEquals('Laravel <i>&amp;</i> Vue — With <i>"awesome stuff"</i>', $link->title);
+    }
 }

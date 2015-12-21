@@ -32,4 +32,37 @@ class Links extends Model
     {
         return parse_url($this->url, PHP_URL_HOST);
     }
+
+    public function getSlugAttribute($value)
+    {
+        return str_slug($this->id.' '.$this->title);
+    }
+
+    public function getTitleAttribute($value)
+    {
+        // Make everything in quotes italic
+        $value = preg_replace('/(\"[^\"]+\")/', '<i>$1</i>', $value);
+        // Make everything between () italic
+        $value = preg_replace('/(\([^\(\)]+\))/', '<i>$1</i>', $value);
+        // Replace two dashes with emdash
+        $value = str_replace('--', '—', $value);
+        // Replace & with styled version
+        $value = str_replace('&', '<i>&amp;</i>', $value);
+
+        return $value;
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    public static function recent($paginate = 15)
+    {
+        return Links::with('user', 'category')
+            ->published()
+            ->orderBy('published_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate($paginate);
+    }
 }
